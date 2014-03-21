@@ -1,0 +1,51 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:sale.change.party:"
+msgid "This sale is not in draft state."
+msgstr "Aquesta venda no està en estat esborrany."
+
+msgctxt "field:sale.change.party.start,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:sale.change.party.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:sale.change.party.start,invoice_address:"
+msgid "Invoice Address"
+msgstr "Adreça de facturació"
+
+msgctxt "field:sale.change.party.start,party:"
+msgid "Party"
+msgstr "Tercers"
+
+msgctxt "field:sale.change.party.start,price_list:"
+msgid "Price List"
+msgstr "Tarifa"
+
+msgctxt "field:sale.change.party.start,shipment_address:"
+msgid "Shipment Address"
+msgstr "Adreça d'enviament"
+
+msgctxt "model:ir.action,name:act_sale_change_party"
+msgid "Change Party"
+msgstr "Canvia tercer"
+
+msgctxt "model:sale.change.party.start,name:"
+msgid "Sale Change Party"
+msgstr "Canvia tercer de venda"
+
+msgctxt "view:sale.change.party.start:"
+msgid "Change Party"
+msgstr "Canvia tercer"
+
+msgctxt "wizard_button:sale.change.party,start,change_party:"
+msgid "Change Party"
+msgstr "Canvia tercer"
+
+msgctxt "wizard_button:sale.change.party,start,end:"
+msgid "Cancel"
+msgstr "Cancel·la"
