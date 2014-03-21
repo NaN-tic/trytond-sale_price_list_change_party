@@ -14,3 +14,6 @@ asigna la tarifa de este y en el momento de cambiar de tercero los precios de la
 se recalcularán con el nuevo precio de la tarifa. Si desea no cambiar de precios, simplemente
 no debe seleccionar la tarifa en el asistente para que se mantengan los mismos precios
 que había introducido.
+
+El cambio de tercero, direcciones o tarifa sólo lo podrá realizar en pedidos de venta
+en estado borrador.
