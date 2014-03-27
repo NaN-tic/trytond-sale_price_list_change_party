@@ -75,7 +75,8 @@ class SaleChangeParty(Wizard):
         sale.invoice_address = self.start.invoice_address
         sale.save()
 
-        if self.start.price_list and sale_pricelist.id != self.start.price_list.id:
+        if self.start.price_list and (sale_pricelist and \
+                (sale_pricelist.id != self.start.price_list.id)):
             for line in sale.lines:
                 if line.unit_price:
                     line.unit_price = line.on_change_quantity()['unit_price']
