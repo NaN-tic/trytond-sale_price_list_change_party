@@ -20,7 +20,7 @@ class SaleChangePartyStart(ModelView):
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
                 Eval('context', {}).get('company', -1)),
             ])
-    party = fields.Many2One('party.party', 'Party', required=True, on_change=['party'])
+    party = fields.Many2One('party.party', 'Party', required=True)
     shipment_address = fields.Many2One('party.address', 'Shipment Address', required=True,
         domain=[('party', '=', Eval('party'))],
         depends=['party'])
@@ -35,6 +35,7 @@ class SaleChangePartyStart(ModelView):
     def default_company():
         return Transaction().context.get('company')
 
+    @fields.depends('party')
     def on_change_party(self):
         pool = Pool()
         sale = pool.get('sale.sale')()
