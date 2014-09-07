@@ -79,7 +79,7 @@ class SaleChangeParty(Wizard):
         if self.start.price_list and (sale_pricelist and \
                 (sale_pricelist.id != self.start.price_list.id)):
             for line in sale.lines:
-                if line.unit_price:
-                    line.unit_price = line.on_change_quantity()['unit_price']
-                    line.save()
+                for key, value in line.on_change_quantity().iteritems():
+                    setattr(line, key, value)
+                line.save()
         return 'end'
