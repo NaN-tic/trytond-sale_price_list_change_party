@@ -76,7 +76,7 @@ class SaleChangeParty(Wizard):
         sale.invoice_address = self.start.invoice_address
         sale.save()
 
-        if self.start.price_list and (sale_pricelist and \
+        if self.start.price_list and (not sale_pricelist or \
                 (sale_pricelist.id != self.start.price_list.id)):
             for line in sale.lines:
                 for key, value in line.on_change_quantity().iteritems():
