@@ -21,12 +21,12 @@ class SaleChangePartyStart(ModelView):
                 Eval('context', {}).get('company', -1)),
             ])
     party = fields.Many2One('party.party', 'Party', required=True)
-    shipment_address = fields.Many2One('party.address', 'Shipment Address', required=True,
+    shipment_address = fields.Many2One('party.address', 'Shipment Address',
         domain=[('party', '=', Eval('party'))],
-        depends=['party'])
-    invoice_address = fields.Many2One('party.address', 'Invoice Address', required=True,
+        depends=['party'], required=True)
+    invoice_address = fields.Many2One('party.address', 'Invoice Address',
         domain=[('party', '=', Eval('party'))],
-        depends=['party'])
+        depends=['party'], required=True)
     price_list = fields.Many2One('product.price_list', 'Price List',
         domain=[('company', '=', Eval('company'))],
         depends=['company'])
@@ -76,7 +76,7 @@ class SaleChangeParty(Wizard):
         sale.invoice_address = self.start.invoice_address
         sale.save()
 
-        if self.start.price_list and (not sale_pricelist or \
+        if self.start.price_list and (not sale_pricelist or
                 (sale_pricelist.id != self.start.price_list.id)):
             for line in sale.lines:
                 for key, value in line.on_change_quantity().iteritems():
