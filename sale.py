@@ -37,11 +37,16 @@ class SaleChangePartyStart(ModelView):
 
     @fields.depends('party')
     def on_change_party(self):
-        pool = Pool()
-        sale = pool.get('sale.sale')()
-        sale.party = self.party
-        res = sale.on_change_party()
-        return res
+        Sale = Pool().get('sale.sale')
+
+        if self.party:
+            sale = Sale()
+            sale.party = self.party
+            sale.on_change_party()
+
+            self.shipment_address = sale.shipment_address
+            self.invoice_address = sale.invoice_address
+            self.price_list = sale.price_list if sale.price_list else None
 
 
 class SaleChangeParty(Wizard):
