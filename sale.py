@@ -84,7 +84,6 @@ class SaleChangeParty(Wizard):
         if self.start.price_list and (not sale_pricelist or
                 (sale_pricelist.id != self.start.price_list.id)):
             for line in sale.lines:
-                for key, value in line.on_change_quantity().iteritems():
-                    setattr(line, key, value)
+                line.on_change_quantity()
                 line.save()
         return 'end'
