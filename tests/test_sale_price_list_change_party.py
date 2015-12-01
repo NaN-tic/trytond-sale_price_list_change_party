@@ -1,34 +1,18 @@
+# This file is part of the sale_price_list_change_party module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 import unittest
-import doctest
 import trytond.tests.test_tryton
-from trytond.tests.test_tryton import test_depends, test_view
-from trytond.tests.test_tryton import doctest_setup, doctest_teardown
+from trytond.tests.test_tryton import ModuleTestCase
 
 
-class SalePriceListChangePartyTestCase(unittest.TestCase):
+class SalePriceListChangePartyTestCase(ModuleTestCase):
     'Test Sale Price List Change Party module'
-
-    def setUp(self):
-        trytond.tests.test_tryton.install_module(
-            'sale_price_list_change_party')
-
-    def test0005views(self):
-        'Test views'
-        test_view('sale_price_list_change_party')
-
-    def test0006depends(self):
-        'Test depends'
-        test_depends()
+    module = 'sale_price_list_change_party'
 
 
 def suite():
     suite = trytond.tests.test_tryton.suite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
         SalePriceListChangePartyTestCase))
-    suite.addTests(doctest.DocFileSuite(
-            'scenario_sale_price_list_change_party.rst',
-            setUp=doctest_setup, tearDown=doctest_teardown, encoding='utf-8',
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE))
     return suite
