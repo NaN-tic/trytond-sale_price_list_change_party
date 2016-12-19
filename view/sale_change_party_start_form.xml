@@ -2,7 +2,7 @@
 <!-- This file is part of the sale_price_list_change_party module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full
 copyright notices and license terms. -->
-<form string="Change Party">
+<form>
     <label name="party"/>
     <field name="party" colspan="3"/>
     <label name="invoice_address"/>
