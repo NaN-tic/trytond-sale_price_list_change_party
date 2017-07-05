@@ -88,6 +88,6 @@ class SaleChangeParty(Wizard):
                     line.party = None
                 if hasattr(line, 'currency'):
                     line.party = None
-                line.on_change_quantity()
+                line.on_change_product()
                 line.save()
         return 'end'
