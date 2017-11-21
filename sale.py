@@ -65,19 +65,29 @@ class SaleChangeParty(Wizard):
                 'sale_not_in_draft_state': 'This sale is not in draft state.',
                 })
 
+    def _get_sale(self, sale):
+        # for field in dir(Sale): field, getattr(Sale, field).domain if hasattr(getattr(Sale, field), 'domain') else ''
+        if hasattr(sale, 'opportunities'):
+            Opportunity = Pool().get('sale.opportunity')
+            opportunities = [opportunity for opportunity in sale.opportunities]
+            if opportunities:
+                Opportunity.write(opportunities, {'party': self.start.party})
+
+        sale.party = self.start.party
+        sale.price_list = self.start.price_list
+        sale.shipment_address = self.start.shipment_address
+        sale.invoice_address = self.start.invoice_address
+
     def transition_change_party(self):
-        pool = Pool()
-        Sale = pool.get('sale.sale')
+        Sale = Pool().get('sale.sale')
+
         sale_id = Transaction().context.get('active_id')
         sale = Sale(sale_id)
         if sale.state != 'draft':
             self.raise_user_error('sale_not_in_draft_state')
         sale_pricelist = sale.price_list
 
-        sale.party = self.start.party
-        sale.price_list = self.start.price_list
-        sale.shipment_address = self.start.shipment_address
-        sale.invoice_address = self.start.invoice_address
+        self._get_sale(sale)
         sale.save()
 
         if self.start.price_list and (not sale_pricelist or
