@@ -95,7 +95,6 @@ Create payment term::
     >>> payment_term = create_payment_term()
     >>> payment_term.save()
 
-
 Create two price list one and assign on to each customer::
 
     >>> PriceList = Model.get('product.price_list')
@@ -145,6 +144,8 @@ Change party of the sale::
 Sale price list and prices should be updated::
 
     >>> sale.reload()
+    >>> sale.party == discount_customer
+    True
     >>> sale.price_list == discount_price_list
     True
     >>> sale_line, = sale.lines
