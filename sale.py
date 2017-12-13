@@ -69,6 +69,8 @@ class SaleChangeParty(Wizard):
     def transition_change_party(self):
         pool = Pool()
         Sale = pool.get('sale.sale')
+        Line = pool.get('sale.line')
+
         sale_id = Transaction().context.get('active_id')
         sale = Sale(sale_id)
         if sale.state != 'draft':
@@ -81,13 +83,24 @@ class SaleChangeParty(Wizard):
         sale.invoice_address = self.start.invoice_address
         sale.save()
 
-        if self.start.price_list and (not sale_pricelist or
-                (sale_pricelist.id != self.start.price_list.id)):
-            for line in sale.lines:
-                if hasattr(line, 'party'):
-                    line.party = None
-                if hasattr(line, 'currency'):
-                    line.party = None
+        to_write = []
+        for line in sale.lines:
+            to_w = False
+            if self.start.price_list and (not sale_pricelist or
+                    (sale_pricelist.id != self.start.price_list.id)):
                 line.on_change_product()
-                line.save()
+                to_w = True
+            if hasattr(line, 'party'):
+                line.party = None
+                to_w = True
+            if hasattr(line, 'currency'):
+                line.party = None
+                to_w = True
+
+            if to_w:
+                to_write.extend(([line], line._save_values))
+
+        if to_write:
+            Line.write(*to_write)
+
         return 'end'
