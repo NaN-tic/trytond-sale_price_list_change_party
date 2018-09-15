@@ -2,13 +2,13 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 from trytond.pool import Pool
-from .sale import *
+from . import sale
 
 
 def register():
     Pool.register(
-        SaleChangePartyStart,
+        sale.SaleChangePartyStart,
         module='sale_price_list_change_party', type_='model')
     Pool.register(
-        SaleChangeParty,
+        sale.SaleChangeParty,
         module='sale_price_list_change_party', type_='wizard')
