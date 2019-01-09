@@ -6,6 +6,8 @@ from trytond.pool import Pool
 from trytond.pyson import Eval, If
 from trytond.transaction import Transaction
 from trytond.wizard import Button, StateTransition, StateView, Wizard
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 
 __all__ = ['SaleChangePartyStart', 'SaleChangeParty']
 
@@ -58,13 +60,6 @@ class SaleChangeParty(Wizard):
             ])
     change_party = StateTransition()
 
-    @classmethod
-    def __setup__(cls):
-        super(SaleChangeParty, cls).__setup__()
-        cls._error_messages.update({
-                'sale_not_in_draft_state': 'This sale is not in draft state.',
-                })
-
     def _get_sale(self, sale):
         # for field in dir(Sale): field, getattr(Sale, field).domain if hasattr(getattr(Sale, field), 'domain') else ''
         if hasattr(sale, 'opportunities'):
@@ -86,7 +81,8 @@ class SaleChangeParty(Wizard):
         sale_id = Transaction().context.get('active_id')
         sale = Sale(sale_id)
         if sale.state != 'draft':
-            self.raise_user_error('sale_not_in_draft_state')
+            raise UserError(gettext(
+                'sale_price_list_change_party.sale_not_in_draft_state'))
         sale_pricelist = sale.price_list
 
         self._get_sale(sale)
