@@ -99,7 +99,7 @@ class SaleChangeParty(Wizard):
                 line.party = None
                 to_w = True
             if hasattr(line, 'currency'):
-                line.party = None
+                line.currency = None
                 to_w = True
 
             if to_w:
