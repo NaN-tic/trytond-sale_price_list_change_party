@@ -21,7 +21,11 @@ class SaleChangePartyStart(ModelView):
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
                 Eval('context', {}).get('company', -1)),
             ])
-    party = fields.Many2One('party.party', 'Party', required=True)
+    party = fields.Many2One('party.party', 'Party', required=True,
+        context={
+            'company': Eval('company'),
+            },
+        depends=['company'])
     shipment_address = fields.Many2One('party.address', 'Shipment Address',
         domain=[('party', '=', Eval('party'))],
         depends=['party'], required=True)
