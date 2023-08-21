@@ -94,11 +94,11 @@ Create payment term::
 Create two price list one and assign on to each customer::
 
     >>> PriceList = Model.get('product.price_list')
-    >>> default_price_list = PriceList(name='Default')
+    >>> default_price_list = PriceList(name='Default', price='list_price')
     >>> price_list_line = default_price_list.lines.new()
     >>> price_list_line.formula = 'unit_price'
     >>> default_price_list.save()
-    >>> discount_price_list = PriceList(name='50% Discount')
+    >>> discount_price_list = PriceList(name='50% Discount', price='list_price')
     >>> price_list_line = discount_price_list.lines.new()
     >>> price_list_line.formula = 'unit_price * 0.5'
     >>> discount_price_list.save()
