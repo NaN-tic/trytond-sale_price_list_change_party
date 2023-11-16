@@ -23,7 +23,7 @@ class SaleChangePartyStart(ModelView):
             ])
     party = fields.Many2One('party.party', 'Party', required=True,
         context={
-            'company': Eval('company'),
+            'company': Eval('company', -1),
             },
         depends=['company'])
     shipment_address = fields.Many2One('party.address', 'Shipment Address',
@@ -33,7 +33,7 @@ class SaleChangePartyStart(ModelView):
         domain=[('party', '=', Eval('party'))],
         depends=['party'], required=True)
     price_list = fields.Many2One('product.price_list', 'Price List',
-        domain=[('company', '=', Eval('company'))],
+        domain=[('company', '=', Eval('company', -1))],
         depends=['company'])
 
     @staticmethod
