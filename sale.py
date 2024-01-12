@@ -27,14 +27,11 @@ class SaleChangePartyStart(ModelView):
             },
         depends=['company'])
     shipment_address = fields.Many2One('party.address', 'Shipment Address',
-        domain=[('party', '=', Eval('party'))],
-        depends=['party'], required=True)
+        domain=[('party', '=', Eval('party'))], required=True)
     invoice_address = fields.Many2One('party.address', 'Invoice Address',
-        domain=[('party', '=', Eval('party'))],
-        depends=['party'], required=True)
+        domain=[('party', '=', Eval('party'))], required=True)
     price_list = fields.Many2One('product.price_list', 'Price List',
-        domain=[('company', '=', Eval('company', -1))],
-        depends=['company'])
+        domain=[('company', '=', Eval('company', -1))])
 
     @staticmethod
     def default_company():
