@@ -104,7 +104,7 @@ class SaleChangeParty(Wizard):
                 to_w = True
 
             if to_w:
-                to_write.extend(([line], line._save_values))
+                to_write.extend(([line], line._save_values()))
 
         if to_write:
             Line.write(*to_write)
