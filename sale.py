@@ -69,7 +69,10 @@ class SaleChangeParty(Wizard):
             if opportunities:
                 Opportunity.write(opportunities, {'party': self.start.party})
 
+        sale.shipment_party = None
+        sale.invoice_party = None
         sale.party = self.start.party
+        sale.on_change_party()
         sale.price_list = self.start.price_list
         sale.shipment_address = self.start.shipment_address
         sale.invoice_address = self.start.invoice_address
