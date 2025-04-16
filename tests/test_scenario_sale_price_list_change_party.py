@@ -129,6 +129,10 @@ class Test(unittest.TestCase):
         # Sale price list and prices should be updated
         sale.reload()
         self.assertEqual(sale.party, discount_customer)
+        self.assertEqual(sale.shipment_party, None)
+        self.assertEqual(sale.invoice_party, None)
+        self.assertEqual(sale.invoice_address, party_address)
+        self.assertEqual(sale.shipment_address, party_address)
         self.assertEqual(sale.price_list, discount_price_list)
 
         sale_line, = sale.lines
