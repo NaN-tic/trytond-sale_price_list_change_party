@@ -2,10 +2,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:sale.change.party:"
-msgid "This sale is not in draft state."
-msgstr "Dieser Verkauf ist nicht in Status Entwurf."
-
 msgctxt "field:sale.change.party.start,company:"
 msgid "Company"
 msgstr "Unternehmen"
