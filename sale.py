@@ -4,7 +4,7 @@
 from trytond.model import ModelView, fields
 from trytond.pool import Pool
 from trytond.pyson import Eval, If
-from trytond.transaction import Transaction
+from trytond.transaction import Transaction, without_check_access
 from trytond.wizard import Button, StateTransition, StateView, Wizard
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
@@ -67,7 +67,9 @@ class SaleChangeParty(Wizard):
             Opportunity = Pool().get('sale.opportunity')
             opportunities = [opportunity for opportunity in sale.opportunities]
             if opportunities:
-                Opportunity.write(opportunities, {'party': self.start.party})
+                with without_check_access():
+                    Opportunity.write(
+                        opportunities, {'party': self.start.party})
 
         sale.shipment_party = None
         sale.invoice_party = None
